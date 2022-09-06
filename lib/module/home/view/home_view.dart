@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:weather_app_demo/constant/app_theme.dart';
 import 'package:weather_app_demo/module/home/controller/home_controller.dart';
+import 'package:weather_app_demo/module/serach_cities/controller/search_city_controller.dart';
 import 'package:weather_app_demo/utils/date_time_converter.dart';
 
+import '../../../routes/app_pages.dart';
+
 class HomeView extends GetView<HomeController> {
+  SearchCityController controller2 = Get.find();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,21 +35,25 @@ class HomeView extends GetView<HomeController> {
                     padding: EdgeInsets.only(top: 20.0, left: 20),
                     child: Text(
                       'Current Weather',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                      style: TextStyle(color: AppTheme.kWhite, fontSize: 20),
                     ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      InkWell(
-                        onTap:(){
-
+                      GestureDetector(
+                        onTap: () {
+                          controller.onClickCity();
                         },
                         child: Row(
                           children: [
-                            Text(controller.adddress.toString()??"",
+                            Text(
+                              controller.adddress.toString() ??'',
+                              style: const TextStyle(
+                                color: AppTheme.kWhite,
+                              ),
                             ),
-                            const Icon(Icons.arrow_drop_down_sharp),
+                            const Icon(Icons.arrow_drop_down_sharp,color:  AppTheme.kWhite,),
                           ],
                         ),
                       ),
@@ -57,7 +65,10 @@ class HomeView extends GetView<HomeController> {
                                 padding: const EdgeInsets.only(
                                     right: 8.0, top: 10.0),
                                 child: Text(
-                                  controller.firstIndexValueOfWeatherResponse.value.temp!.day.toString()??"",
+                                  controller.firstIndexValueOfWeatherResponse
+                                          .value.temp!.day
+                                          .toString() ??
+                                      "",
                                   style: const TextStyle(
                                     fontSize: 20,
                                     color: AppTheme.kWhite,
@@ -106,8 +117,13 @@ class HomeView extends GetView<HomeController> {
                               children: [
                                 Text(
                                   DateTimeConverter()
-                                      .convertTime(controller.firstIndexValueOfWeatherResponse.value.dt??1111)
-                                      .toString()??"",
+                                          .convertTime(controller
+                                                  .firstIndexValueOfWeatherResponse
+                                                  .value
+                                                  .dt ??
+                                              1111)
+                                          .toString() ??
+                                      "",
                                   style: const TextStyle(
                                     fontSize: 18,
                                     color: AppTheme.kDarkBlue,
@@ -130,8 +146,13 @@ class HomeView extends GetView<HomeController> {
                             ),
                             Text(
                               DateTimeConverter()
-                                  .dateTimeConvert(controller.firstIndexValueOfWeatherResponse.value.dt??45677)
-                                  .toString()??"",
+                                      .dateTimeConvert(controller
+                                              .firstIndexValueOfWeatherResponse
+                                              .value
+                                              .dt ??
+                                          45677)
+                                      .toString() ??
+                                  "",
                               style: const TextStyle(
                                 fontSize: 16,
                                 color: AppTheme.kBlack,

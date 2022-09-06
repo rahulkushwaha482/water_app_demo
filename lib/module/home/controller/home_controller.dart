@@ -1,6 +1,8 @@
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:weather_app_demo/routes/app_pages.dart';
+import '../../../constant/api_constant.dart';
 import '../../../model/weather_response.dart';
 import '../../../services/api_helper.dart';
 
@@ -21,13 +23,15 @@ class HomeController extends GetxController {
       position = positionValue;
       _getAccountDetails(position);
     });
+
     _getAddressFromLatLong(position).then((fetchedAddress) {
       adddress.value = fetchedAddress;
     });
+
   }
 
   void _getAccountDetails(Position position) {
-    _apiHelper.getApiCall(position.latitude,position.longitude).then(
+    _apiHelper.getApiCall(API_BASE_URL+'lat=${position.latitude}&lon=${position.longitude}'+END_POINT ).then(
           (response) {
             if (response?.statusCode == 200) {
               final responseData = weatherResponseFromJson(response!.body);
@@ -40,13 +44,8 @@ class HomeController extends GetxController {
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
-
-    // Test if location services are enabled.
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      // Location services are not enabled don't continue
-      // accessing the position and request users of the
-      // App to enable the location services.
       return Future.error('Location services are disabled.');
     }
 
@@ -80,5 +79,9 @@ class HomeController extends GetxController {
     String address = place.locality.toString();
     print(address);
     return address;
+  }
+
+  void onClickCity(){
+    Get.toNamed('/search_city');
   }
 }

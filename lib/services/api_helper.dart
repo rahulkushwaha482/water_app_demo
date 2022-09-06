@@ -47,11 +47,12 @@ class ApiHelper {
     return response;
   }
 
-  Future<Response?> getApiCall(double lat,double long) async {
+  Future<Response?> getApiCall(String url) async {
     Response? response;
+   Loader().showLoadingWidget();
     try {
       response = await get(
-        Uri.parse(API_BASE_URL+'lat=$lat&lon=$long'+END_POINT),
+        Uri.parse(url),
       );
       Get.back();
       _errorHandler(response);
