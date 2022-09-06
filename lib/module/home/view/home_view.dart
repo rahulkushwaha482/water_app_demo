@@ -57,10 +57,7 @@ class HomeView extends GetView<HomeController> {
                                 padding: const EdgeInsets.only(
                                     right: 8.0, top: 10.0),
                                 child: Text(
-                                  controller.weatherResponse.value.daily?.first
-                                          .temp?.day
-                                          .toString() ??
-                                      "",
+                                  controller.firstIndexValueOfWeatherResponse.value.temp!.day.toString()??"",
                                   style: const TextStyle(
                                     fontSize: 20,
                                     color: AppTheme.kWhite,
@@ -109,9 +106,8 @@ class HomeView extends GetView<HomeController> {
                               children: [
                                 Text(
                                   DateTimeConverter()
-                                      .convertTime(controller.weatherResponse
-                                          .value.daily!.first.dt)
-                                      .toString(),
+                                      .convertTime(controller.firstIndexValueOfWeatherResponse.value.dt??1111)
+                                      .toString()??"",
                                   style: const TextStyle(
                                     fontSize: 18,
                                     color: AppTheme.kDarkBlue,
@@ -134,9 +130,8 @@ class HomeView extends GetView<HomeController> {
                             ),
                             Text(
                               DateTimeConverter()
-                                  .dateTimeConvert(controller
-                                      .weatherResponse.value.daily!.first.dt)
-                                  .toString(),
+                                  .dateTimeConvert(controller.firstIndexValueOfWeatherResponse.value.dt??45677)
+                                  .toString()??"",
                               style: const TextStyle(
                                 fontSize: 16,
                                 color: AppTheme.kBlack,

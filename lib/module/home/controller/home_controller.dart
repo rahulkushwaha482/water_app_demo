@@ -1,32 +1,38 @@
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:weather_app_demo/constant/api_constant.dart';
 import '../../../model/weather_response.dart';
 import '../../../services/api_helper.dart';
 
 class HomeController extends GetxController {
   final _apiHelper = Get.find<ApiHelper>();
   Rx<WeatherResponse> weatherResponse = WeatherResponse().obs;
+  Rx<Daily> firstIndexValueOfWeatherResponse = Daily().obs;
   RxString adddress = ''.obs;
+  var position;
 
   @override
   Future<void> onInit() async {
     super.onInit();
-    _getAccountDetails();
-    Position position = await _determinePosition();
+
+    position = await _determinePosition();
+
+    _determinePosition().then((positionValue) {
+      position = positionValue;
+      _getAccountDetails(position);
+    });
     _getAddressFromLatLong(position).then((fetchedAddress) {
       adddress.value = fetchedAddress;
     });
   }
 
-  void _getAccountDetails() {
-    _apiHelper.getApiCall(API_GET_WEATHER_DETAIL).then(
+  void _getAccountDetails(Position position) {
+    _apiHelper.getApiCall(position.latitude,position.longitude).then(
           (response) {
-        if (response?.statusCode == 200) {
-          final responseData = weatherResponseFromJson(response!.body);
-          weatherResponse.value = responseData;
-        }
+            if (response?.statusCode == 200) {
+              final responseData = weatherResponseFromJson(response!.body);
+              firstIndexValueOfWeatherResponse.value = responseData.daily![0];
+            }
       },
     );
   }
