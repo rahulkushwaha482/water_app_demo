@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,19 +23,19 @@ Future<void> main() async {
     [DeviceOrientation.portraitUp],
   );
   runZonedGuarded<Future<void>>(
-        () async {
+    () async {
       runApp(
         GetMaterialApp(
-          title : cAppTitle,
-          initialRoute : AppPages.INITIAL,
-          getPages : AppPages.routes,
-          debugShowCheckedModeBanner : false,
-          builder : BotToastInit(),
-          navigatorObservers : [BotToastNavigatorObserver()],
+          title: cAppTitle,
+          initialRoute: AppPages.INITIAL,
+          getPages: AppPages.routes,
+          debugShowCheckedModeBanner: false,
+          builder: BotToastInit(),
+          navigatorObservers: [BotToastNavigatorObserver()],
         ),
       );
     },
-        (dynamic error, StackTrace stackTrace) {
+    (dynamic error, StackTrace stackTrace) {
       print('<<----------ERROR--------->> \n$error');
       print('<<----------STACK TRACE--------->> \n$stackTrace');
       Get.defaultDialog(

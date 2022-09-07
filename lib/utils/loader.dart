@@ -11,7 +11,6 @@ class Loader {
 
   Loader._internal();
 
-  // Removal of this loading widget has been done at api_helper.dart.
   Future<dynamic> showLoadingWidget() => showDialog(
         barrierDismissible: false,
         context: Get.context!,

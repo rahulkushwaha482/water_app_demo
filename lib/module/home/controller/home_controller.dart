@@ -1,7 +1,6 @@
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:weather_app_demo/routes/app_pages.dart';
 import '../../../constant/api_constant.dart';
 import '../../../model/weather_response.dart';
 import '../../../services/api_helper.dart';
@@ -27,16 +26,19 @@ class HomeController extends GetxController {
     _getAddressFromLatLong(position).then((fetchedAddress) {
       adddress.value = fetchedAddress;
     });
-
   }
 
   void _getAccountDetails(Position position) {
-    _apiHelper.getApiCall(API_BASE_URL+'lat=${position.latitude}&lon=${position.longitude}'+END_POINT ).then(
-          (response) {
-            if (response?.statusCode == 200) {
-              final responseData = weatherResponseFromJson(response!.body);
-              firstIndexValueOfWeatherResponse.value = responseData.daily![0];
-            }
+    _apiHelper
+        .getApiCall(API_BASE_URL +
+            'lat=${position.latitude}&lon=${position.longitude}' +
+            END_POINT)
+        .then(
+      (response) {
+        if (response?.statusCode == 200) {
+          final responseData = weatherResponseFromJson(response!.body);
+          firstIndexValueOfWeatherResponse.value = responseData.daily![0];
+        }
       },
     );
   }
@@ -74,14 +76,13 @@ class HomeController extends GetxController {
 
   Future<String> _getAddressFromLatLong(Position position) async {
     List<Placemark> placemarks =
-    await placemarkFromCoordinates(position.latitude, position.longitude);
+        await placemarkFromCoordinates(position.latitude, position.longitude);
     Placemark place = placemarks[0];
     String address = place.locality.toString();
-    print(address);
     return address;
   }
 
-  void onClickCity(){
+  void onClickCity() {
     Get.toNamed('/search_city');
   }
 }

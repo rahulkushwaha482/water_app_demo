@@ -5,10 +5,9 @@ import 'package:weather_app_demo/module/home/controller/home_controller.dart';
 import 'package:weather_app_demo/module/serach_cities/controller/search_city_controller.dart';
 import 'package:weather_app_demo/utils/date_time_converter.dart';
 
-import '../../../routes/app_pages.dart';
-
 class HomeView extends GetView<HomeController> {
   SearchCityController controller2 = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -20,7 +19,6 @@ class HomeView extends GetView<HomeController> {
             Container(
               width: MediaQuery.of(context).size.width,
               height: 200,
-              // Below is the code for Linear Gradient.
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   colors: [Colors.green, Colors.blue],
@@ -48,12 +46,15 @@ class HomeView extends GetView<HomeController> {
                         child: Row(
                           children: [
                             Text(
-                              controller.adddress.toString() ??'',
+                              controller.adddress.toString() ?? '',
                               style: const TextStyle(
                                 color: AppTheme.kWhite,
                               ),
                             ),
-                            const Icon(Icons.arrow_drop_down_sharp,color:  AppTheme.kWhite,),
+                            const Icon(
+                              Icons.arrow_drop_down_sharp,
+                              color: AppTheme.kWhite,
+                            ),
                           ],
                         ),
                       ),

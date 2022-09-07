@@ -4,8 +4,7 @@ import 'package:weather_app_demo/constant/api_constant.dart';
 import 'package:weather_app_demo/model/search_city_response.dart';
 import '../../../services/api_helper.dart';
 
-class SearchCityController extends GetxController{
-
+class SearchCityController extends GetxController {
   late TextEditingController cityNameController;
   Rx<SearchCityModel> searchCityResponse = SearchCityModel().obs;
   final _apiHelper = Get.find<ApiHelper>();
@@ -17,22 +16,20 @@ class SearchCityController extends GetxController{
     cityNameController = TextEditingController();
   }
 
-  void onBackClick(){
+  void onBackClick() {
     Get.back();
   }
 
-  void searchCity(String city){
-
-    if(city.isEmpty){
-
-    }else if(city.length>3){
+  void searchCity(String city) {
+    if (city.isEmpty) {
+    } else if (city.length > 3) {
       _getCityList(city);
     }
   }
 
-  void _getCityList(String city){
-    _apiHelper.getApiCall(SEARCH_CITY+city).then(
-          (response) {
+  void _getCityList(String city) {
+    _apiHelper.getApiCall(SEARCH_CITY + city).then(
+      (response) {
         if (response?.statusCode == 200) {
           final responseData = searchCityResponseFromJson(response!.body);
           searchCityResponse.value = responseData;
@@ -41,8 +38,7 @@ class SearchCityController extends GetxController{
     );
   }
 
-  void getCityName(String name){
-     cityname = name;
+  void getCityName(String name) {
+    cityname = name;
   }
-
 }

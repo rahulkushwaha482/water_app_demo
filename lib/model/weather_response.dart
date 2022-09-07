@@ -3,7 +3,6 @@ import 'dart:convert';
 WeatherResponse weatherResponseFromJson(String str) =>
     WeatherResponse.fromJson(json.decode(str));
 
-
 class WeatherResponse {
   WeatherResponse({
     this.lat,
@@ -28,12 +27,11 @@ class WeatherResponse {
         daily: json["daily"] == null
             ? null
             : List<Daily>.from(
-          json["daily"].map(
-                (x) => Daily.fromJson(x),
-          ),
-        ),
+                json["daily"].map(
+                  (x) => Daily.fromJson(x),
+                ),
+              ),
       );
-
 }
 
 class Daily {
@@ -45,10 +43,9 @@ class Daily {
     this.moonset,
     this.moonPhase,
     this.temp,
-
   });
 
-   int? dt;
+  int? dt;
   int? sunrise;
   int? sunset;
   int? moonrise;
@@ -56,18 +53,15 @@ class Daily {
   double? moonPhase;
   Temp? temp;
 
-
   factory Daily.fromJson(Map<String, dynamic> json) => Daily(
-    dt: json["dt"],
-    sunrise: json["sunrise"],
-    sunset: json["sunset"],
-    moonrise: json["moonrise"],
-    moonset: json["moonset"],
-    moonPhase: json["moon_phase"].toDouble(),
-    temp: Temp.fromJson(json["temp"]),
-
-  );
-
+        dt: json["dt"],
+        sunrise: json["sunrise"],
+        sunset: json["sunset"],
+        moonrise: json["moonrise"],
+        moonset: json["moonset"],
+        moonPhase: json["moon_phase"].toDouble(),
+        temp: Temp.fromJson(json["temp"]),
+      );
 }
 
 class Temp {
@@ -88,21 +82,20 @@ class Temp {
   double? morn;
 
   factory Temp.fromJson(Map<String, dynamic> json) => Temp(
-    day: json["day"].toDouble(),
-    min: json["min"].toDouble(),
-    max: json["max"].toDouble(),
-    night: json["night"].toDouble(),
-    eve: json["eve"].toDouble(),
-    morn: json["morn"].toDouble(),
-  );
+        day: json["day"].toDouble(),
+        min: json["min"].toDouble(),
+        max: json["max"].toDouble(),
+        night: json["night"].toDouble(),
+        eve: json["eve"].toDouble(),
+        morn: json["morn"].toDouble(),
+      );
 
   Map<String, dynamic> toJson() => {
-    "day": day,
-    "min": min,
-    "max": max,
-    "night": night,
-    "eve": eve,
-    "morn": morn,
-  };
+        "day": day,
+        "min": min,
+        "max": max,
+        "night": night,
+        "eve": eve,
+        "morn": morn,
+      };
 }
-

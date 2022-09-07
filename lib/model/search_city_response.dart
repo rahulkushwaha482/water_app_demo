@@ -3,7 +3,6 @@ import 'dart:convert';
 SearchCityModel searchCityResponseFromJson(String str) =>
     SearchCityModel.fromJson(json.decode(str));
 
-
 String searchCityResponseToJson(SearchCityModel data) =>
     json.encode(data.toJson());
 
@@ -40,10 +39,10 @@ class Data {
 
   Data(
       {this.record,
-        this.pageToken,
-        this.totalPages,
-        this.currentPage,
-        this.previousPage});
+      this.pageToken,
+      this.totalPages,
+      this.currentPage,
+      this.previousPage});
 
   Data.fromJson(Map<String, dynamic> json) {
     if (json['Record'] != null) {

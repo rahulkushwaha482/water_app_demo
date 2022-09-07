@@ -7,7 +7,6 @@ import 'package:weather_app_demo/constant/app_error.dart';
 import '../constant/api_constant.dart';
 import '../utils/loader.dart';
 
-
 class ApiHelper {
   void _errorHandler(Response response) {
     debugPrint(
@@ -29,7 +28,6 @@ class ApiHelper {
 
   Future<Response?> postApiCall(
       String urlEndPoint, Map<String, String> requestMap) async {
-
     Response? response;
     try {
       response = await post(
@@ -49,7 +47,7 @@ class ApiHelper {
 
   Future<Response?> getApiCall(String url) async {
     Response? response;
-   Loader().showLoadingWidget();
+    Loader().showLoadingWidget();
     try {
       response = await get(
         Uri.parse(url),
